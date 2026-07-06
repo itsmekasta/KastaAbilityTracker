@@ -1,0 +1,31 @@
+## Interface: 70300
+## Title: Kasta|cffff7f00AbilityTracker|r
+## Notes: Shows the last Hit Combo-qualifying ability cast (Windwalker Monk) and the current Hit Combo stack count.
+## Author: Kasta
+## Version: 1.0.0
+## SavedVariables: KastaAbilityTrackerDB
+
+# 0. Bundled Ace3 subset (AceGUI-3.0/AceConfig-3.0), same as KastaCD -
+#    must load before UI\KastaAbilityTracker_Options.lua/_UI.lua
+KastaAbilityTracker_libs.xml
+
+# 1. Entry point: addon identity, version global, load message
+Core\KastaAbilityTracker.lua
+
+# 2. SavedVariables defaults - every other file reads settings through
+#    GetKATDB(), so this must load first
+Core\KastaAbilityTracker_DB.lua
+
+# 3. Tracking: combat log watcher, icon frame, Hit Combo stack overlay
+#    (depends on KastaAbilityTracker_DB.lua)
+Modules\KastaAbilityTracker_Tracking.lua
+
+# 4. Settings UI options table (depends on DB + tracking module's
+#    exposed Apply*/SetKATUnlocked globals + Ace3 libs)
+UI\KastaAbilityTracker_Options.lua
+
+# 4b. Settings UI bootstrap (depends on KastaAbilityTracker_Options.lua)
+UI\KastaAbilityTracker_UI.lua
+
+# 5. Slash command (depends on UI\KastaAbilityTracker_UI.lua)
+Core\KastaAbilityTracker_Events.lua
